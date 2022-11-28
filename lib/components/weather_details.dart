@@ -19,6 +19,7 @@ class WeatherDetails extends StatelessWidget {
             child: Row(
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[
+                //TODO: add units to every widget
                 _accessoryWidget(context, "Wind:", "PH", Colors.transparent),
                 const VerticalDivider(thickness: 1, color: Colors.white),
                 _accessoryWidget(context, "Humidity:", "PH", Colors.transparent),
