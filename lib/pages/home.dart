@@ -19,7 +19,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: kBackgroundColor,
       appBar: AppBar(
@@ -31,7 +30,7 @@ class _HomePageState extends State<HomePage> {
         children: const [
           WeatherInfo(),
           WeatherDetails(),
-          Forecast()
+          Forecast(),
         ],
       ),
     );
