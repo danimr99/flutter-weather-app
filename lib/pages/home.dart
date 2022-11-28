@@ -13,6 +13,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  String city = "Barcelona";
+  String country = "Spain";
+  String countryCode = "es";
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +23,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: kBackgroundColor,
       appBar: AppBar(
-        title: const Text("Barcelona"),
+        title: Text("$city, $country"),
         elevation: 0,
         backgroundColor: Colors.transparent,
       ),
