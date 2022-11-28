@@ -5,3 +5,15 @@ const kCurrentTemperature = TextStyle(
   color: Colors.white,
   fontWeight: FontWeight.bold,
 );
+
+const kCurrentEdgeTemperatureLabel = TextStyle(
+  fontSize: 18,
+  color: Colors.white,
+  fontWeight: FontWeight.w100,
+);
+
+const kCurrentEdgeTemperature = TextStyle(
+  fontSize: 18,
+  color: Colors.white,
+  fontWeight: FontWeight.bold,
+);
