@@ -1,0 +1,1 @@
+const kHorizontalMargin = 32;
