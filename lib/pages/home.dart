@@ -26,12 +26,21 @@ class _HomePageState extends State<HomePage> {
         elevation: 0,
         backgroundColor: Colors.transparent,
       ),
-      body: Column(
-        children: const [
-          WeatherInfo(),
-          WeatherDetails(),
-          Forecast(),
-        ],
+      body: SingleChildScrollView(
+        physics: const NeverScrollableScrollPhysics(),
+        child: Column(
+          children: [
+            const WeatherInfo(),
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 30,
+            ),
+            const WeatherDetails(),
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 30,
+            ),
+            const Forecast(),
+          ],
+        ),
       ),
     );
   }
