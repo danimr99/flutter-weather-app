@@ -15,7 +15,7 @@ class ForecastItem extends StatelessWidget {
   }) : super(key: key);
 
   String _setLocaleDatetime(DateTime dateTime) {
-    DateFormat formatter = DateFormat.yMMMMd();
+    DateFormat formatter = DateFormat("d MMM hh:mm");
     return formatter.format(dateTime);
   }
 

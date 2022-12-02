@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_weather_app/constants/colors.dart';
 import 'package:flutter_weather_app/constants/typography.dart';
 import 'package:flutter_weather_app/models/forecast_data.dart';
@@ -29,66 +30,72 @@ class _HomePageState extends State<HomePage> {
         title: Text("$city, $country"),
         elevation: 0,
         backgroundColor: Colors.transparent,
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          systemNavigationBarColor: Colors.transparent,
+        ),
       ),
-      body: FutureBuilder(
-        future: Future.wait([
-          service.getCurrentWeather(city, countryCode),
-          service.getForecast(city, countryCode)
-        ]),
-        builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
-          if (snapshot.hasError) {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.warning,
-                  size: 64,
-                  color: Colors.white.withOpacity(0.1),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / 25,
-                ),
-                const Text(
-                  "An error has occurred while connecting to the server.",
-                  style: kThinLabel,
-                  textAlign: TextAlign.center,
-                ),
-              ],
+      body: SafeArea(
+        child: FutureBuilder(
+          future: Future.wait([
+            service.getCurrentWeather(city, countryCode),
+            service.getForecast(city, countryCode)
+          ]),
+          builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
+            if (snapshot.hasError) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.warning,
+                    size: 64,
+                    color: Colors.white.withOpacity(0.1),
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 25,
+                  ),
+                  const Text(
+                    "An error has occurred while connecting to the server.",
+                    style: kThinLabel,
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              );
+            }
+
+            if (!snapshot.hasData) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+
+            final WeatherData weatherData = snapshot.data![0];
+            final ForecastData forecastData = snapshot.data![1];
+
+            return SingleChildScrollView(
+              physics: const NeverScrollableScrollPhysics(),
+              child: Column(
+                children: [
+                  WeatherInfo(
+                    currentWeather: weatherData,
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 30,
+                  ),
+                  WeatherDetails(
+                    currentWeather: weatherData,
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 30,
+                  ),
+                  Forecast(
+                    forecastWeather: forecastData,
+                  ),
+                ],
+              ),
             );
-          }
-
-          if (!snapshot.hasData) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-
-          final WeatherData weatherData = snapshot.data![0];
-          final ForecastData forecastData = snapshot.data![1];
-
-          return SingleChildScrollView(
-            physics: const NeverScrollableScrollPhysics(),
-            child: Column(
-              children: [
-                WeatherInfo(
-                  currentWeather: weatherData,
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / 30,
-                ),
-                WeatherDetails(
-                  currentWeather: weatherData,
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / 30,
-                ),
-                Forecast(
-                  forecastWeather: forecastData,
-                ),
-              ],
-            ),
-          );
-        },
+          },
+        ),
       ),
     );
   }
