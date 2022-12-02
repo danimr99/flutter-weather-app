@@ -6,7 +6,7 @@ const kCurrentTemperature = TextStyle(
   fontWeight: FontWeight.bold,
 );
 
-const kCurrentEdgeTemperatureLabel = TextStyle(
+const kThinLabel = TextStyle(
   fontSize: 18,
   color: Colors.white,
   fontWeight: FontWeight.w100,

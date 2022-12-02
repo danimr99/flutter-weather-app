@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_weather_app/components/weather_detail_item.dart';
 import 'package:flutter_weather_app/constants/layout.dart';
+import 'package:flutter_weather_app/models/weather_data.dart';
 
 class WeatherDetails extends StatelessWidget {
-  const WeatherDetails({Key? key}) : super(key: key);
+  final WeatherData currentWeather;
+
+  const WeatherDetails({
+    Key? key,
+    required this.currentWeather,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,26 +23,26 @@ class WeatherDetails extends StatelessWidget {
         ),
         child: Row(
           mainAxisSize: MainAxisSize.max,
-          children: const <Widget>[
+          children: [
             WeatherDetailItem(
               title: "Wind",
-              value: "120 Km/h",
+              value: "${currentWeather.windSpeed.toString()} Km/h",
             ),
-            VerticalDivider(
+            const VerticalDivider(
               thickness: 1,
               color: Colors.white,
             ),
             WeatherDetailItem(
               title: "Humidity",
-              value: "32%",
+              value: "${currentWeather.humidity.toString()}%",
             ),
-            VerticalDivider(
+            const VerticalDivider(
               thickness: 1,
               color: Colors.white,
             ),
             WeatherDetailItem(
               title: "Pressure",
-              value: "1.3 Pa",
+              value: "${currentWeather.pressure.toString()} Pa",
             ),
           ],
         ),

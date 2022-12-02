@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_weather_app/constants/layout.dart';
-
-import '../constants/typography.dart';
-import 'forecast_item.dart';
+import 'package:flutter_weather_app/constants/typography.dart';
+import 'package:flutter_weather_app/models/forecast_data.dart';
+import 'package:flutter_weather_app/components/forecast_item.dart';
 
 class Forecast extends StatelessWidget {
-  const Forecast({Key? key}) : super(key: key);
+  final ForecastData forecastWeather;
+
+  const Forecast({
+    Key? key,
+    required this.forecastWeather,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,14 +31,16 @@ class Forecast extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height / 2.2,
             child: ListView.separated(
-              itemCount: 14,
+              itemCount: forecastWeather.forecast.length,
               separatorBuilder: (BuildContext context, int index) {
                 return const SizedBox(
                   height: kThicknessDivider,
                 );
               },
               itemBuilder: (BuildContext context, int index) {
-                return const ForecastItem();
+                return ForecastItem(
+                  item: forecastWeather.forecast[index],
+                );
               },
             ),
           ),

@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_weather_app/components/weather_image.dart';
 import 'package:flutter_weather_app/constants/layout.dart';
-
-import '../constants/typography.dart';
+import 'package:flutter_weather_app/constants/typography.dart';
+import 'package:flutter_weather_app/models/weather_data.dart';
+import 'package:flutter_weather_app/providers/weather_image.dart';
 
 class WeatherInfo extends StatelessWidget {
-  const WeatherInfo({Key? key}) : super(key: key);
+  final WeatherData currentWeather;
+
+  const WeatherInfo({
+    Key? key,
+    required this.currentWeather,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,15 +26,16 @@ class WeatherInfo extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 WeatherImage(
-                  width: MediaQuery.of(context).size.width / 3,
+                  width: MediaQuery.of(context).size.width / 4,
                   height: MediaQuery.of(context).size.height,
-                  image: "assets/images/sunny.png",
+                  image:
+                      "assets/images/${WeatherImageProvider.getWeatherImage(currentWeather.description)}.png",
                 ),
                 SizedBox(
-                  width: MediaQuery.of(context).size.width / 15,
+                  width: MediaQuery.of(context).size.width / 25,
                 ),
-                const Text(
-                  "23º",
+                Text(
+                  "${currentWeather.temperature.toString()}º",
                   style: kCurrentTemperature,
                 ),
               ],
@@ -43,17 +50,14 @@ class WeatherInfo extends StatelessWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
-                    "Minimum",
-                    style: kCurrentEdgeTemperatureLabel
-                  ),
+                  const Text("Minimum", style: kThinLabel),
                   SizedBox(
                     height: MediaQuery.of(context).size.height / 150,
                   ),
                   Text(
-                    "17º",
+                    "${currentWeather.minTemperature.toString()}º",
                     style: kCurrentEdgeTemperature.copyWith(
-                        color: Colors.blue
+                      color: Colors.blue,
                     ),
                   ),
                 ],
@@ -63,15 +67,15 @@ class WeatherInfo extends StatelessWidget {
                 children: [
                   const Text(
                     "Maximum",
-                    style: kCurrentEdgeTemperatureLabel,
+                    style: kThinLabel,
                   ),
                   SizedBox(
                     height: MediaQuery.of(context).size.height / 150,
                   ),
                   Text(
-                    "26º",
+                    "${currentWeather.maxTemperature.toString()}º",
                     style: kCurrentEdgeTemperature.copyWith(
-                        color: Colors.red
+                      color: Colors.red,
                     ),
                   ),
                 ],

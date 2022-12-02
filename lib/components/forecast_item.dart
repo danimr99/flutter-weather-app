@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:flutter_weather_app/constants/layout.dart';
+import 'package:flutter_weather_app/constants/typography.dart';
 import 'package:flutter_weather_app/components/weather_image.dart';
-
-import '../constants/layout.dart';
-import '../constants/typography.dart';
+import 'package:flutter_weather_app/models/forecast_data.dart';
+import 'package:flutter_weather_app/providers/weather_image.dart';
 
 class ForecastItem extends StatelessWidget {
+  final ForecastDataItem item;
+
   const ForecastItem({
     Key? key,
+    required this.item,
   }) : super(key: key);
+
+  String _setLocaleDatetime(DateTime dateTime) {
+    DateFormat formatter = DateFormat.yMMMMd();
+    return formatter.format(dateTime);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,29 +35,27 @@ class ForecastItem extends StatelessWidget {
             WeatherImage(
               width: MediaQuery.of(context).size.width / 6,
               height: MediaQuery.of(context).size.height,
-              image: "assets/images/windy.png",
+              image:
+                  "assets/images/${WeatherImageProvider.getWeatherImage(item.description)}.png",
             ),
-            const Text(
-              "6 Oct 06:00",
+            Text(
+              // TODO: Fix format => "6 Oct 06:00",
+              _setLocaleDatetime(item.datetime),
               style: kForecastDatetime,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "17º",
-                  style: kCurrentEdgeTemperature.copyWith(
-                      color: Colors.blue
-                  ),
+                  "${item.minTemperature.toString()}º",
+                  style: kCurrentEdgeTemperature.copyWith(color: Colors.blue),
                 ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width / 15,
                 ),
                 Text(
-                  "26º",
-                  style: kCurrentEdgeTemperature.copyWith(
-                      color: Colors.red
-                  ),
+                  "${item.maxTemperature.toString()}º",
+                  style: kCurrentEdgeTemperature.copyWith(color: Colors.red),
                 ),
               ],
             ),
