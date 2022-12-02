@@ -26,7 +26,7 @@ class WeatherDetails extends StatelessWidget {
           children: [
             WeatherDetailItem(
               title: "Wind",
-              value: "${currentWeather.windSpeed.toString()} Km/h",
+              value: "${currentWeather.windSpeed.toStringAsFixed(1)} Km/h",
             ),
             const VerticalDivider(
               thickness: 1,

@@ -30,20 +30,18 @@ class Forecast extends StatelessWidget {
           SizedBox(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height / 2.2,
-            child: SafeArea(
-              child: ListView.separated(
-                itemCount: forecastWeather.forecast.length,
-                separatorBuilder: (BuildContext context, int index) {
-                  return const SizedBox(
-                    height: kThicknessDivider,
-                  );
-                },
-                itemBuilder: (BuildContext context, int index) {
-                  return ForecastItem(
-                    item: forecastWeather.forecast[index],
-                  );
-                },
-              ),
+            child: ListView.separated(
+              itemCount: forecastWeather.forecast.length,
+              separatorBuilder: (BuildContext context, int index) {
+                return const SizedBox(
+                  height: kThicknessDivider,
+                );
+              },
+              itemBuilder: (BuildContext context, int index) {
+                return ForecastItem(
+                  item: forecastWeather.forecast[index],
+                );
+              },
             ),
           ),
         ],

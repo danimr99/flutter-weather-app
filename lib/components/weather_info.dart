@@ -35,7 +35,7 @@ class WeatherInfo extends StatelessWidget {
                   width: MediaQuery.of(context).size.width / 25,
                 ),
                 Text(
-                  "${currentWeather.temperature.toString()}º",
+                  "${currentWeather.temperature.toStringAsFixed(1)}º",
                   style: kCurrentTemperature,
                 ),
               ],
@@ -55,7 +55,7 @@ class WeatherInfo extends StatelessWidget {
                     height: MediaQuery.of(context).size.height / 150,
                   ),
                   Text(
-                    "${currentWeather.minTemperature.toString()}º",
+                    "${currentWeather.minTemperature.toStringAsFixed(1)}º",
                     style: kCurrentEdgeTemperature.copyWith(
                       color: Colors.blue,
                     ),
@@ -73,7 +73,7 @@ class WeatherInfo extends StatelessWidget {
                     height: MediaQuery.of(context).size.height / 150,
                   ),
                   Text(
-                    "${currentWeather.maxTemperature.toString()}º",
+                    "${currentWeather.maxTemperature.toStringAsFixed(1)}º",
                     style: kCurrentEdgeTemperature.copyWith(
                       color: Colors.red,
                     ),

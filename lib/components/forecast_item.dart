@@ -39,7 +39,6 @@ class ForecastItem extends StatelessWidget {
                   "assets/images/${WeatherImageProvider.getWeatherImage(item.description)}.png",
             ),
             Text(
-              // TODO: Fix format => "6 Oct 06:00",
               _setLocaleDatetime(item.datetime),
               style: kForecastDatetime,
             ),
@@ -47,14 +46,14 @@ class ForecastItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "${item.minTemperature.toString()}º",
+                  "${item.minTemperature.toStringAsFixed(1)}º",
                   style: kCurrentEdgeTemperature.copyWith(color: Colors.blue),
                 ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width / 15,
                 ),
                 Text(
-                  "${item.maxTemperature.toString()}º",
+                  "${item.maxTemperature.toStringAsFixed(1)}º",
                   style: kCurrentEdgeTemperature.copyWith(color: Colors.red),
                 ),
               ],
