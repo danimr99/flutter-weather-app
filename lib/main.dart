@@ -12,12 +12,10 @@ class WeatherApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Weather App',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: const HomePage(),
-        debugShowCheckedModeBanner: false);
+    return const MaterialApp(
+      title: 'Weather App',
+      home: HomePage(),
+      debugShowCheckedModeBanner: false,
+    );
   }
 }
