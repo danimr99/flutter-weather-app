@@ -26,7 +26,7 @@ class WeatherService {
       final json = jsonDecode(response.body);
 
       final WeatherData weatherData = WeatherData(
-          description: json["weather"][0]["main"],
+          description: json["weather"][0]["description"],
           temperature: json["main"]["temp"] as num,
           minTemperature: json["main"]["temp_min"] as num,
           maxTemperature: json["main"]["temp_max"] as num,
@@ -53,7 +53,7 @@ class WeatherService {
 
       json["list"].forEach((item) {
         forecast.add(ForecastDataItem(
-            description: item["weather"][0]["main"],
+            description: item["weather"][0]["description"],
             temperature: item["main"]["temp"] as num,
             minTemperature: item["main"]["temp_min"] as num,
             maxTemperature: item["main"]["temp_max"] as num,
